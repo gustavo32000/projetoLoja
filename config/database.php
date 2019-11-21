@@ -12,12 +12,12 @@ class Database{
     public $conexao;
     public function getConnection(){
         try{
-            $conexao = new PDO("mysql:host=localhost ; port=3306 ; dbname=dbloja" , "root" , "");
+            $conexao = new PDO("mysql:host=localhost;port=3306;dbname=dbloja","root","");
             #definir tipo de caracter para o banco como utf8 que é o caracter acentuado
             $conexao->exec("set name utf8");
         } 
         catch(PDOException $e){
-            echo "Erro ao tentar estabelecer a conexão com o banco de dados. ".$e->getMessage
+            echo "Erro ao tentar estabelecer a conexão com o banco de dados. ".$e->getMessage();
         }
         return $conexao;
     }

@@ -6,7 +6,7 @@ class Usuario{
     public $senha;
     public $foto;
 
-    public function __constructor($db){
+    public function __construct($db){
         $this->conexao = $db;
     }
 
@@ -37,9 +37,9 @@ public function login (){
     O primeiro ponto de interrogação é destinado ao nome de usuário e o segundo a senha */
     $stmt = $this->conexao->prepare($query);
 
-    $this->senha md5($this->senha)
+    $this->senha=md5($this->senha);
 
-    $stmt->bindParam(1,$this=->nomeusuario);
+    $stmt->bindParam(1,$this->nomeusuario);
     $stmt->bindParam(2,$this->senha);
 
     $stmt->execute();
