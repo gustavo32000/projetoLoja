@@ -26,7 +26,7 @@ public function listar(){
 
     /* Função para cadastrar os contatos no banco de dados */
     public function cadastro(){
-        $query = "insert into contato telefone=:t, email=:e";
+        $query = "insert into contato set telefone=:t, email=:e";
 
         $stmt = $this->conexao->prepare($query);
         /* Foi utilizada 2 funções para tratar os dados que estão vindo do usuário para a api
