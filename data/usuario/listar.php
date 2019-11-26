@@ -76,7 +76,7 @@ if($stmt->rowCount() > 0){
         /* O comando header(cabeçalho) responde  via HTTP o status code 200 que representa sucesso na consulta de dados. */            
 
     }
-    header("HTTP/1.0 200");]
+    header("HTTP/1.0 200");
 
     /* Pegamos o array usuario_arr que foi construído em php com os dados dos usuarios 
     e convertemos para o formato json para exibir ao cliente requisitante */
