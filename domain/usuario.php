@@ -89,7 +89,7 @@ public function login (){
         }
     }
     public function alterarSenha(){
-        $query = "update usuario set senha=:? where id=?";
+        $query = "update usuario set senha=? where id=?";
 
         $stmt = $this->conexao->prepare($query);
 
