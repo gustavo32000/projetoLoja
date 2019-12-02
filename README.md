@@ -47,5 +47,5 @@ Abaixo é apresentado o digrama de  banco de dados desenvolvido para este projet
 
 ## Work Flow do APP
 
-![](img/workflow.png)
+![](db/img/workflow.png)
 
