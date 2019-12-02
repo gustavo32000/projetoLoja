@@ -1,9 +1,10 @@
 <?php
 
-class Contato{
+class Detalhepedido{
     public $id;
-    public $email;
-    public $telefone;
+    public $id_pedido;
+    public $id_produto;
+    public $quantidade;
     
 
 
@@ -19,7 +20,7 @@ class Contato{
     */
     public function listar(){
         #Seleciona todos os campos da tabela contato
-        $query = "select * from contato";
+        $query = "select * from detalhepedido";
         /*
          Foi criada a variavel stmt(Statment -> Sentença) para guardar a preparacao da consulta 
          select que será executada posteriomente.
@@ -39,7 +40,7 @@ class Contato{
     Função para cadastrar os contatos no banco de dados 
     */
     public function cadastro(){
-        $query = "insert into contato set telefone=:t, email=:e";
+        $query = "insert into detalhepedido set id_pedido=:p, id_produto=:d, quantidade=:q";
 
         $stmt = $this->conexao->prepare($query);
 
@@ -51,14 +52,16 @@ class Contato{
         json para cadastrar em banco. 
         */
 
-        $this->telefone = htmlspecialchars(strip_tags($this->telefone));
-        $this->email = htmlspecialchars(strip_tags($this->email));
+        $this->id_pedido = htmlspecialchars(strip_tags($this->id_pedido));
+        $this->id_produto = htmlspecialchars(strip_tags($this->id_produto));
+        $this->quantidade = htmlspecialchars(strip_tags($this->quantidade));
         
 
     
 
-        $stmt->bindParam(":t",$this->telefone);
-        $stmt->bindParam(":e",$this->email);
+        $stmt->bindParam(":p",$this->id_pedido);
+        $stmt->bindParam(":d",$this->id_produto);
+        $stmt->bindParam(":q",$this->quantidade);
         
 
         if($stmt->execute()){
@@ -70,15 +73,16 @@ class Contato{
 
     }
 
-    public function alterarContato(){
+    public function alterardetalhe(){
 
-        $query = "update contato set telefone=:t, email=:e where id=:i";
+        $query = "update detalhepedido set id_pedido=:p, id_produto=:d, quantidade=:q where id=:i";
 
         $stmt= $this->conexao->prepare($query);
 
-        $stmt->bindParam(":t",$this->telefone);
-        $stmt->bindParam(":e",$this->email);
         $stmt->bindParam(":i",$this->id);
+        $stmt->bindParam(":p",$this->id_pedido);
+        $stmt->bindParam(":d",$this->id_produto);
+        $stmt->bindParam(":q",$this->quantidade);
 
         if($stmt->execute()){
             return true;
@@ -89,7 +93,7 @@ class Contato{
     }
 
     public function apagar(){
-        $query = "delete from contato where id=?";
+        $query = "delete from detalhepedido where id=?";
 
         $stmt=$this->conexao->prepare($query);
 

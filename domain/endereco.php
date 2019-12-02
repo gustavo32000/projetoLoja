@@ -1,9 +1,12 @@
 <?php
 
-class Contato{
+class endereco{
     public $id;
-    public $email;
-    public $telefone;
+    public $logradouro;
+    public $numero;
+    public $complemento;
+    public $bairro;
+    public $cep;
     
 
 
@@ -14,12 +17,12 @@ class Contato{
 
 
     /*
-    Função listar para selecionar todos os contato cadastrados no banco de dados. 
+    Função listar para selecionar todos os endereco cadastrados no banco de dados. 
     Essa função retorna uma lista com todos os dados.
     */
     public function listar(){
-        #Seleciona todos os campos da tabela contato
-        $query = "select * from contato";
+        #Seleciona todos os campos da tabela endereco
+        $query = "select * from endereco";
         /*
          Foi criada a variavel stmt(Statment -> Sentença) para guardar a preparacao da consulta 
          select que será executada posteriomente.
@@ -36,10 +39,10 @@ class Contato{
  
 
     /*
-    Função para cadastrar os contatos no banco de dados 
+    Função para cadastrar os enderecos no banco de dados 
     */
     public function cadastro(){
-        $query = "insert into contato set telefone=:t, email=:e";
+        $query = "insert into endereco set logradouro=:l, numero=:n, complemento=:c, bairro=:b, cep=:p";
 
         $stmt = $this->conexao->prepare($query);
 
@@ -51,14 +54,20 @@ class Contato{
         json para cadastrar em banco. 
         */
 
-        $this->telefone = htmlspecialchars(strip_tags($this->telefone));
-        $this->email = htmlspecialchars(strip_tags($this->email));
+        $this->logradouro = htmlspecialchars(strip_tags($this->logradouro));
+        $this->numero = htmlspecialchars(strip_tags($this->numero));
+        $this->complemento = htmlspecialchars(strip_tags($this->complemento));
+        $this->bairro = htmlspecialchars(strip_tags($this->bairro));
+        $this->cep = htmlspecialchars(strip_tags($this->cep));
         
 
     
 
-        $stmt->bindParam(":t",$this->telefone);
-        $stmt->bindParam(":e",$this->email);
+        $stmt->bindParam(":l",$this->logradouro);
+        $stmt->bindParam(":n",$this->numero);
+        $stmt->bindParam(":c",$this->complemento);
+        $stmt->bindParam(":b",$this->bairro);
+        $stmt->bindParam(":p",$this->cep);
         
 
         if($stmt->execute()){
@@ -70,15 +79,19 @@ class Contato{
 
     }
 
-    public function alterarContato(){
+    public function alterarendereco(){
 
-        $query = "update contato set telefone=:t, email=:e where id=:i";
+        $query = "update endereco set logradouro=:l, numero=:n, complemento=:c, bairro=:b, cep=:p where id=:i";
 
         $stmt= $this->conexao->prepare($query);
-
-        $stmt->bindParam(":t",$this->telefone);
-        $stmt->bindParam(":e",$this->email);
+        
+        $stmt->bindParam(":l",$this->logradouro);
+        $stmt->bindParam(":n",$this->numero);
+        $stmt->bindParam(":c",$this->complemento);
+        $stmt->bindParam(":b",$this->bairro);
+        $stmt->bindParam(":p",$this->cep);
         $stmt->bindParam(":i",$this->id);
+
 
         if($stmt->execute()){
             return true;
@@ -89,7 +102,7 @@ class Contato{
     }
 
     public function apagar(){
-        $query = "delete from contato where id=?";
+        $query = "delete from endereco where id=?";
 
         $stmt=$this->conexao->prepare($query);
 
