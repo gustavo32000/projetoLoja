@@ -20,6 +20,22 @@ export class AppComponent {
       title: 'List',
       url: '/list',
       icon: 'list'
+    },
+    {
+      title: 'Perfil',
+      url: '/perfil',
+      icon: 'person'
+    }
+    ,
+    {
+      title: 'Meus pedidos',
+      url: '/pedidos',
+      icon: 'cube'
+    },
+    {
+      title: 'Sair',
+      url: '/sair',
+      icon: 'exit'
     }
   ];
 
